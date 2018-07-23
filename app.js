@@ -1,19 +1,26 @@
 const vowels = ['a', 'e', 'i', 'o', 'u'];
-const ay = '-ay';
 
 function pigLatinEncoder (str) {
   let firstChar = str.charAt(0);
   let encodedStr = '';
-  console.log(firstChar);
-  console.log(str);
   if (vowels.includes(firstChar)) {
-    encodedStr = str.concat(ay);
-    // let indexOfFirst = str.indexOf(firstChar);
-    // encodedStr = str.substring(indexOfFirst + 1, str.length).concat(firstChar + ay);
-    console.log(encodedStr);
+    encodedStr = `${str}-ay`;
   } else {
-    console.log('starts with consonant')
+    for (let i = 0; i < str.length; i ++) {
+      if (vowels.includes(str[i])) { 
+        let remainingStr = str.substring(i, str.length);
+        let strToConcat = str.substring(0, i);
+        encodedStr = remainingStr.concat(`-${strToConcat}ay`);
+        break;
+      }
+    }
   }
+  return encodedStr;
 }
 
-pigLatinEncoder('are');
+console.log(pigLatinDecoder('anana-bay'));
+
+function pigLatinDecoder (str) {
+  let findHyphen = str.indexOf('-');
+  console.log(findHyphen);
+}
