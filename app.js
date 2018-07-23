@@ -18,9 +18,18 @@ function pigLatinEncoder (str) {
   return encodedStr;
 }
 
-console.log(pigLatinDecoder('anana-bay'));
+console.log(pigLatinDecoder('omelet-ay'));
 
 function pigLatinDecoder (str) {
+  let decodedStr = '';
   let findHyphen = str.indexOf('-');
-  console.log(findHyphen);
+  let letterAfter = str.charAt(findHyphen + 1);
+  if (!vowels.includes(letterAfter)) {
+    let workStr = str.substring(findHyphen+1, str.length);
+    let parsedStr = workStr.substring(0,(workStr.indexOf('a')));
+    decodedStr = `${parsedStr}${str.substring(0, findHyphen)}`;
+  } else {
+    decodedStr = str.substring(0, findHyphen);
+  }
+return decodedStr;
 }
